@@ -21,8 +21,9 @@ poetry run uvicorn app.main:app --reload
 
 The API health check is available at http://127.0.0.1:8000/health, and the
 interactive API documentation is at http://127.0.0.1:8000/docs.
-The catalog API exposes `GET /api/v1/categories`, `GET /api/v1/filters`,
-`GET /api/v1/products`, and `GET /api/v1/products/{product_id}`.
+The API exposes `GET /api/v1/categories`, `GET /api/v1/filters`,
+`GET /api/v1/products`, `GET /api/v1/products/{product_id}`,
+`POST /api/v1/cart/validate`, and `POST /api/v1/orders`.
 
 The local database URL is configured in `backend/.env`. The example file uses
 development-only credentials; replace them before using a non-local database.
