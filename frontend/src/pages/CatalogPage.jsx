@@ -208,7 +208,7 @@ export default function CatalogPage() {
             </div>
           </div>
 
-          <Link className="clear-filters" to="/">
+          <Link className="clear-filters" to="/catalog">
             Сбросить фильтры
           </Link>
         </aside>

@@ -24,12 +24,16 @@ interactive API documentation is at http://127.0.0.1:8000/docs.
 The API exposes `GET /api/v1/categories`, `GET /api/v1/filters`,
 `GET /api/v1/products`, `GET /api/v1/products/{product_id}`,
 `POST /api/v1/cart/validate`, and `POST /api/v1/orders`.
+The storefront landing page is `/`; the searchable catalog is `/catalog`.
+`seed_demo` fills missing demo product images with original local SVG artwork
+from `frontend/public/images/products` and leaves any existing image links intact.
 
 The administration page is available at http://127.0.0.1:5173/admin. Set
 `ADMIN_USERNAME`, `ADMIN_PASSWORD`, and `ADMIN_TOKEN_SECRET` in `backend/.env`
 before signing in; use a password with at least 12 characters and a random
 token secret with at least 32 characters. Admin tokens expire after eight
-hours by default. There is no public admin registration.
+hours by default. Admin product images can be configured with a URL or a
+local path. There is no public admin registration.
 
 The local database URL is configured in `backend/.env`. The example file uses
 development-only credentials; replace them before using a non-local database.

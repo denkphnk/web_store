@@ -3,6 +3,7 @@ import { useCart } from './cart/useCart.js'
 import AdminPage from './pages/AdminPage.jsx'
 import CartPage from './pages/CartPage.jsx'
 import CatalogPage from './pages/CatalogPage.jsx'
+import HomePage from './pages/HomePage.jsx'
 import ProductPage from './pages/ProductPage.jsx'
 import './App.css'
 
@@ -16,7 +17,8 @@ function SiteHeader() {
         <span>forma</span>
       </Link>
       <nav className="site-nav" aria-label="Главная навигация">
-        <Link to="/">Каталог</Link>
+        <Link to="/">Главная</Link>
+        <Link to="/catalog">Каталог</Link>
         <span>Демо-магазин одежды</span>
         <Link className="cart-link" to="/cart">
           Корзина <span className="cart-count">{itemCount}</span>
@@ -31,7 +33,7 @@ function NotFoundPage() {
   return (
     <section className="notice notice--empty">
       <h1>Страница не найдена</h1>
-      <Link to="/">Перейти в каталог</Link>
+      <Link to="/catalog">Перейти в каталог</Link>
     </section>
   )
 }
@@ -43,7 +45,8 @@ function App() {
 
       <main>
         <Routes>
-          <Route path="/" element={<CatalogPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/products/:productId" element={<ProductPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/admin" element={<AdminPage />} />

@@ -45,7 +45,7 @@ export default function ProductPage() {
     return (
       <div className="notice notice--error" role="alert">
         <p>{error}</p>
-        <Link to="/">Вернуться в каталог</Link>
+        <Link to="/catalog">Вернуться в каталог</Link>
       </div>
     )
   }
@@ -60,7 +60,7 @@ export default function ProductPage() {
 
   return (
     <section className="product-page">
-      <Link className="back-link" to="/">← Вернуться в каталог</Link>
+      <Link className="back-link" to="/catalog">← Вернуться в каталог</Link>
       <div className="product-detail">
         <div className="product-detail__visual">
           {image ? (

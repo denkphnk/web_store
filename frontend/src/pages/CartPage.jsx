@@ -119,7 +119,7 @@ export default function CartPage() {
           Тестовый заказ на сумму {currency.format(Number(completedOrder.total_amount))}.
           Оплата не проводилась.
         </p>
-        <Link className="button button--dark" to="/">Вернуться в каталог</Link>
+        <Link className="button button--dark" to="/catalog">Вернуться в каталог</Link>
       </section>
     )
   }
@@ -139,7 +139,7 @@ export default function CartPage() {
           <div className="notice notice--empty">
             <h2>В корзине пока пусто</h2>
             <p>Добавьте понравившиеся вещи из каталога.</p>
-            <Link to="/">Перейти в каталог</Link>
+            <Link to="/catalog">Перейти в каталог</Link>
           </div>
         )}
       </section>
@@ -160,7 +160,7 @@ export default function CartPage() {
           <p className="eyebrow">ВАШ ВЫБОР</p>
           <h1>Корзина</h1>
         </div>
-        <Link className="back-link" to="/">Продолжить покупки</Link>
+        <Link className="back-link" to="/catalog">Продолжить покупки</Link>
       </div>
 
       {cartError && (
