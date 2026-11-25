@@ -3,7 +3,7 @@ from decimal import Decimal
 from sqlalchemy import select
 
 from app.core.database import SessionLocal
-from app.models import Category, Product, ProductVariant
+from app.models import Category, Product, ProductImage, ProductVariant
 
 DEMO_CATEGORIES = [
     ("Футболки", "t-shirts"),
@@ -19,6 +19,7 @@ DEMO_PRODUCTS = [
         "Плотный хлопок, свободная посадка на каждый день.",
         "1990.00",
         "t-shirts",
+        "/images/products/basic-tee.svg",
         [("S", "Белый", 12), ("M", "Белый", 8), ("M", "Чёрный", 5), ("L", "Чёрный", 3)],
     ),
     (
@@ -26,6 +27,7 @@ DEMO_PRODUCTS = [
         "Мягкий хлопковый лонгслив с лаконичной отделкой.",
         "2690.00",
         "t-shirts",
+        "/images/products/cotton-longsleeve.svg",
         [("S", "Молочный", 6), ("M", "Молочный", 10), ("L", "Графит", 4)],
     ),
     (
@@ -33,6 +35,7 @@ DEMO_PRODUCTS = [
         "Лёгкая рубашка из смесового льна для тёплой погоды.",
         "4990.00",
         "shirts",
+        "/images/products/linen-shirt.svg",
         [("S", "Голубой", 4), ("M", "Голубой", 7), ("L", "Белый", 5)],
     ),
     (
@@ -40,6 +43,7 @@ DEMO_PRODUCTS = [
         "Уютный футер и регулируемый капюшон.",
         "5990.00",
         "sweatshirts",
+        "/images/products/relaxed-hoodie.svg",
         [("M", "Серый", 9), ("L", "Серый", 4), ("L", "Зелёный", 3)],
     ),
     (
@@ -47,6 +51,7 @@ DEMO_PRODUCTS = [
         "Классический деним средней плотности.",
         "6990.00",
         "trousers",
+        "/images/products/straight-jeans.svg",
         [("28", "Синий", 3), ("30", "Синий", 6), ("32", "Синий", 5)],
     ),
     (
@@ -54,6 +59,7 @@ DEMO_PRODUCTS = [
         "Лёгкая куртка с карманами и высоким воротником.",
         "10990.00",
         "outerwear",
+        "/images/products/light-jacket.svg",
         [("M", "Тёмно-синий", 2), ("L", "Тёмно-синий", 4)],
     ),
 ]
@@ -72,11 +78,15 @@ def seed_demo() -> None:
             categories[slug] = category
         session.flush()
 
-        for name, description, price, category_slug, variants in DEMO_PRODUCTS:
+        for name, description, price, category_slug, image_url, variants in DEMO_PRODUCTS:
             existing_product = session.scalar(
                 select(Product).where(Product.name == name)
             )
             if existing_product is not None:
+                if not existing_product.images:
+                    existing_product.images.append(
+                        ProductImage(url=image_url, position=0)
+                    )
                 continue
             session.add(
                 Product(
@@ -85,6 +95,7 @@ def seed_demo() -> None:
                     price=Decimal(price),
                     category=categories[category_slug],
                     is_published=True,
+                    images=[ProductImage(url=image_url, position=0)],
                     variants=[
                         ProductVariant(
                             size=size,

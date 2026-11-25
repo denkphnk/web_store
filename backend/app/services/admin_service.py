@@ -131,9 +131,45 @@ class AdminService:
 
     def update_order_status(self, order_id: UUID, new_status: str) -> Order:
         with self.session.begin():
-            order = self.repository.get_order(order_id)
+            order = self.repository.get_order(order_id, lock=True)
             if order is None:
                 raise AdminResourceNotFound("Заказ не найден.")
+
+            if order.status == new_status:
+                return order
+
+            quantities: dict[UUID, int] = {}
+            for item in order.items:
+                if item.variant_id is not None:
+                    quantities[item.variant_id] = (
+                        quantities.get(item.variant_id, 0) + item.quantity
+                    )
+
+            variants = self.repository.lock_variants(sorted(quantities))
+            variants_by_id = {variant.id: variant for variant in variants}
+            if order.status == "cancelled" and new_status != "cancelled":
+                if len(variants_by_id) != len(quantities) or any(
+                    item.variant_id is None for item in order.items
+                ):
+                    raise AdminConflictError(
+                        "Нельзя восстановить заказ: некоторые варианты товара "
+                        "больше недоступны."
+                    )
+                if any(
+                    variants_by_id[variant_id].stock < quantity
+                    for variant_id, quantity in quantities.items()
+                ):
+                    raise AdminConflictError(
+                        "Недостаточно остатка, чтобы восстановить заказ."
+                    )
+                for variant_id, quantity in quantities.items():
+                    variants_by_id[variant_id].stock -= quantity
+            elif order.status != "cancelled" and new_status == "cancelled":
+                for variant_id, quantity in quantities.items():
+                    variant = variants_by_id.get(variant_id)
+                    if variant is not None:
+                        variant.stock += quantity
+
             order.status = new_status
             self.session.flush()
         return order

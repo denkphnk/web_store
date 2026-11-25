@@ -3,7 +3,7 @@ from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.orm import Session, joinedload, selectinload
 
-from app.models import Category, Order, Product
+from app.models import Category, Order, Product, ProductVariant
 
 
 class AdminRepository:
@@ -71,10 +71,25 @@ class AdminRepository:
         )
         return list(self.session.scalars(statement).all())
 
-    def get_order(self, order_id: UUID) -> Order | None:
+    def get_order(self, order_id: UUID, *, lock: bool = False) -> Order | None:
         statement = (
             select(Order)
             .where(Order.id == order_id)
             .options(selectinload(Order.items))
         )
+        if lock:
+            statement = statement.with_for_update(of=Order)
         return self.session.scalar(statement)
+
+    def lock_variants(
+        self, variant_ids: list[UUID]
+    ) -> list[ProductVariant]:
+        if not variant_ids:
+            return []
+        statement = (
+            select(ProductVariant)
+            .where(ProductVariant.id.in_(variant_ids))
+            .order_by(ProductVariant.id)
+            .with_for_update()
+        )
+        return list(self.session.scalars(statement).all())
