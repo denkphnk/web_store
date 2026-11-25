@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getProduct } from '../api/catalog.js'
+import { useCart } from '../cart/useCart.js'
 
 const currency = new Intl.NumberFormat('ru-RU', {
   style: 'currency',
@@ -10,6 +11,8 @@ const currency = new Intl.NumberFormat('ru-RU', {
 
 export default function ProductPage() {
   const { productId } = useParams()
+  const navigate = useNavigate()
+  const { addItem, cartError, cartNotice } = useCart()
   const [productState, setProductState] = useState(null)
   const [selectedVariantId, setSelectedVariantId] = useState('')
   const loading = productState?.id !== productId
@@ -104,9 +107,20 @@ export default function ProductPage() {
               </p>
             )}
           </div>
-          <p className="product-detail__note">
-            Корзина и оформление заказа появятся на следующем этапе.
-          </p>
+          <button
+            className="button button--dark add-to-cart"
+            type="button"
+            disabled={!selectedVariant}
+            onClick={() => {
+              if (selectedVariant && addItem(product, selectedVariant)) {
+                navigate('/cart')
+              }
+            }}
+          >
+            Добавить в корзину
+          </button>
+          {cartError && <p className="field-error" role="alert">{cartError}</p>}
+          {cartNotice && <p className="field-error" role="status">{cartNotice}</p>}
         </div>
       </div>
     </section>

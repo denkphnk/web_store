@@ -1,7 +1,29 @@
 import { Link, Route, Routes } from 'react-router-dom'
+import { useCart } from './cart/useCart.js'
+import CartPage from './pages/CartPage.jsx'
 import CatalogPage from './pages/CatalogPage.jsx'
 import ProductPage from './pages/ProductPage.jsx'
 import './App.css'
+
+function SiteHeader() {
+  const { itemCount } = useCart()
+
+  return (
+    <header className="site-header">
+      <Link className="brand" to="/" aria-label="Forma — главная">
+        <span className="brand__mark">F</span>
+        <span>forma</span>
+      </Link>
+      <nav className="site-nav" aria-label="Главная навигация">
+        <Link to="/">Каталог</Link>
+        <span>Демо-магазин одежды</span>
+        <Link className="cart-link" to="/cart">
+          Корзина <span className="cart-count">{itemCount}</span>
+        </Link>
+      </nav>
+    </header>
+  )
+}
 
 function NotFoundPage() {
   return (
@@ -15,21 +37,13 @@ function NotFoundPage() {
 function App() {
   return (
     <div className="app-shell">
-      <header className="site-header">
-        <Link className="brand" to="/" aria-label="Forma — главная">
-          <span className="brand__mark">F</span>
-          <span>forma</span>
-        </Link>
-        <nav className="site-nav" aria-label="Главная навигация">
-          <Link to="/">Каталог</Link>
-          <span>Демо-магазин одежды</span>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <main>
         <Routes>
           <Route path="/" element={<CatalogPage />} />
           <Route path="/products/:productId" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
