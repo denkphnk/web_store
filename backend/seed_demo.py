@@ -19,7 +19,7 @@ DEMO_PRODUCTS = [
         "Плотный хлопок, свободная посадка на каждый день.",
         "1990.00",
         "t-shirts",
-        "/images/products/basic-tee.svg",
+        "/images/products/basic-tee.jpg",
         [("S", "Белый", 12), ("M", "Белый", 8), ("M", "Чёрный", 5), ("L", "Чёрный", 3)],
     ),
     (
@@ -27,7 +27,7 @@ DEMO_PRODUCTS = [
         "Мягкий хлопковый лонгслив с лаконичной отделкой.",
         "2690.00",
         "t-shirts",
-        "/images/products/cotton-longsleeve.svg",
+        "/images/products/cotton-longsleeve.jpg",
         [("S", "Молочный", 6), ("M", "Молочный", 10), ("L", "Графит", 4)],
     ),
     (
@@ -35,7 +35,7 @@ DEMO_PRODUCTS = [
         "Лёгкая рубашка из смесового льна для тёплой погоды.",
         "4990.00",
         "shirts",
-        "/images/products/linen-shirt.svg",
+        "/images/products/linen-shirt.jpg",
         [("S", "Голубой", 4), ("M", "Голубой", 7), ("L", "Белый", 5)],
     ),
     (
@@ -43,7 +43,7 @@ DEMO_PRODUCTS = [
         "Уютный футер и регулируемый капюшон.",
         "5990.00",
         "sweatshirts",
-        "/images/products/relaxed-hoodie.svg",
+        "/images/products/relaxed-hoodie.jpg",
         [("M", "Серый", 9), ("L", "Серый", 4), ("L", "Зелёный", 3)],
     ),
     (
@@ -51,7 +51,7 @@ DEMO_PRODUCTS = [
         "Классический деним средней плотности.",
         "6990.00",
         "trousers",
-        "/images/products/straight-jeans.svg",
+        "/images/products/jeans.jpg",
         [("28", "Синий", 3), ("30", "Синий", 6), ("32", "Синий", 5)],
     ),
     (
@@ -59,7 +59,7 @@ DEMO_PRODUCTS = [
         "Лёгкая куртка с карманами и высоким воротником.",
         "10990.00",
         "outerwear",
-        "/images/products/light-jacket.svg",
+        "/images/products/light-jacket.jpg",
         [("M", "Тёмно-синий", 2), ("L", "Тёмно-синий", 4)],
     ),
 ]

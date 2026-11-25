@@ -25,7 +25,7 @@ The API exposes `GET /api/v1/categories`, `GET /api/v1/filters`,
 `GET /api/v1/products`, `GET /api/v1/products/{product_id}`,
 `POST /api/v1/cart/validate`, and `POST /api/v1/orders`.
 The storefront landing page is `/`; the searchable catalog is `/catalog`.
-`seed_demo` fills missing demo product images with original local SVG artwork
+`seed_demo` fills missing demo product images with original local JPG artwork
 from `frontend/public/images/products` and leaves any existing image links intact.
 
 The administration page is available at http://127.0.0.1:5173/admin. Set
