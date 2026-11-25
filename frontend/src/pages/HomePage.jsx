@@ -55,7 +55,7 @@ export default function HomePage() {
             Спокойные цвета, удобные формы и вещи, которые легко собрать
             в образ на каждый день.
           </p>
-          <Link className="button button--dark" to="/catalog">
+          <Link className="button button--dark home-hero__cta" to="/catalog">
             Открыть каталог
           </Link>
         </div>
