@@ -1,5 +1,6 @@
 import { Link, Route, Routes } from 'react-router-dom'
 import { useCart } from './cart/useCart.js'
+import AdminPage from './pages/AdminPage.jsx'
 import CartPage from './pages/CartPage.jsx'
 import CatalogPage from './pages/CatalogPage.jsx'
 import ProductPage from './pages/ProductPage.jsx'
@@ -20,6 +21,7 @@ function SiteHeader() {
         <Link className="cart-link" to="/cart">
           Корзина <span className="cart-count">{itemCount}</span>
         </Link>
+        <Link to="/admin">Админ</Link>
       </nav>
     </header>
   )
@@ -44,6 +46,7 @@ function App() {
           <Route path="/" element={<CatalogPage />} />
           <Route path="/products/:productId" element={<ProductPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

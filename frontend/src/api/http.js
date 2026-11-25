@@ -8,11 +8,19 @@ export class ApiError extends Error {
   }
 }
 
-export async function request(path, { method = 'GET', body, signal } = {}) {
+export async function request(path, {
+  method = 'GET',
+  body,
+  headers = {},
+  signal,
+} = {}) {
   const response = await fetch(`${API_BASE_URL}${path}`, {
     method,
     signal,
-    headers: body ? { 'Content-Type': 'application/json' } : undefined,
+    headers: {
+      ...(body ? { 'Content-Type': 'application/json' } : {}),
+      ...headers,
+    },
     body: body ? JSON.stringify(body) : undefined,
   })
   const payload = await response.json()
