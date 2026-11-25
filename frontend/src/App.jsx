@@ -19,7 +19,6 @@ function SiteHeader() {
       <nav className="site-nav" aria-label="Главная навигация">
         <Link to="/">Главная</Link>
         <Link to="/catalog">Каталог</Link>
-        <span>Демо-магазин одежды</span>
         <Link className="cart-link" to="/cart">
           Корзина <span className="cart-count">{itemCount}</span>
         </Link>
@@ -56,7 +55,6 @@ function App() {
 
       <footer className="site-footer">
         <span>forma</span>
-        <span>Демо интернет-магазина одежды</span>
       </footer>
     </div>
   )
