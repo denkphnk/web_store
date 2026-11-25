@@ -25,6 +25,12 @@ The API exposes `GET /api/v1/categories`, `GET /api/v1/filters`,
 `GET /api/v1/products`, `GET /api/v1/products/{product_id}`,
 `POST /api/v1/cart/validate`, and `POST /api/v1/orders`.
 
+The administration page is available at http://127.0.0.1:5173/admin. Set
+`ADMIN_USERNAME`, `ADMIN_PASSWORD`, and `ADMIN_TOKEN_SECRET` in `backend/.env`
+before signing in; use a password with at least 12 characters and a random
+token secret with at least 32 characters. Admin tokens expire after eight
+hours by default. There is no public admin registration.
+
 The local database URL is configured in `backend/.env`. The example file uses
 development-only credentials; replace them before using a non-local database.
 
