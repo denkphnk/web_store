@@ -1,0 +1,16 @@
+[project]
+name = "internet-shop-api"
+version = "0.1.0"
+description = "Backend API for the internet shop demo"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "fastapi>=0.115.0,<1.0.0",
+    "uvicorn[standard]>=0.34.0,<1.0.0",
+]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
