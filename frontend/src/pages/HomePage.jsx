@@ -60,7 +60,7 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="home-hero__visual" aria-hidden="true">
-          <img src="/images/products/light-jacket.svg" alt="" />
+          <img src="/images/products/light-jacket.jpg" alt="" />
           <span>ЛИНИЯ · ОСЕНЬ / ЗИМА</span>
         </div>
         <div className="home-hero__index" aria-hidden="true">01 / 06</div>
